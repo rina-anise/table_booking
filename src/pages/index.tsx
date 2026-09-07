@@ -1,17 +1,21 @@
 import BookingForm from "@/components/BookingForm";
+import ConfirmationScreen from "@/components/ConfirmationScreen";
 import { BookingErrors, BookingFormData, BookingStatus } from "@/types/booking";
 import { validateDate, validateGuests, validateName, validatePhone, validateTime } from "@/utils/validation";
 import { ChangeEvent, SubmitEvent, useState } from "react";
 
-export default function Home() {
-  // Данные
-  const [formData, setFormData] = useState<BookingFormData>({
+// Константа для formData
+const initialFormData: BookingFormData = {
     name: '',
     phone: '',
     date: '',
     time: '',
     guests: 1
-  })
+  }
+
+export default function Home() {
+  // Данные
+  const [formData, setFormData] = useState<BookingFormData>(initialFormData)
   const [errors, setErrors] = useState<BookingErrors>();
   const [status, setStatus] = useState<BookingStatus>('idle');
 
@@ -58,12 +62,18 @@ export default function Home() {
     }
   }
 
+  // Функция для отправки нового бронирования
+  function handleReset() {
+    setFormData(initialFormData)
+    setStatus('idle')
+    setErrors({})
+  }
+
   return (
     <div>
-      {/* {
-        status !== 'success' ? <BookingForm /> : <ConfirmationScreen />
-      } */}
-      <BookingForm formData={formData} errors={errors} status={status} onChange={handleChange} onSubmit={handleSubmit}/>
+      {
+        status !== 'success' ? <BookingForm formData={formData} errors={errors} status={status} onChange={handleChange} onSubmit={handleSubmit}/> : <ConfirmationScreen formData={formData} onReset={handleReset}/>
+      }
     </div>
   );
 }
