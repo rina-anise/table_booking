@@ -70,7 +70,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-background flex flex-col items-center px-4 py-10 md:py-16">
       {
         status !== 'success' ? <BookingForm formData={formData} errors={errors} status={status} onChange={handleChange} onSubmit={handleSubmit}/> : <ConfirmationScreen formData={formData} onReset={handleReset}/>
       }
