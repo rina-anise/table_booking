@@ -1,40 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Table Booking
 
-## Getting Started
+Страница бронирования столика онлайн в ресторане на React + TypeScript + Tailwind CSS: форма бронирования с валидацией и экраном подтверждения
+Демо: [https://tablebooking-blue.vercel.app/](https://tablebooking-blue.vercel.app/)
 
-First, run the development server:
+## Как запустить локально
 
-```bash
+1. Клонируй репозиторий:
+\`\`\`bash
+git clone <ссылка-на-твой-репозиторий>
+\`\`\`
+
+2. Установи зависимости:
+\`\`\`bash
+npm install
+\`\`\`
+
+3. Запусти dev-сервер:
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Открой [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Принятые решения
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Использовала Tailwind CSS, тк быстрее настраивать адаптацию, не нужно вести отдельные CSS-файлы под компонент, повторяющиеся цвета вынесла в CSS-переменные;
+- Данные (formData, status, error) хранятся в 1 месте, а компоненты (BookingForm, ConfirmationScreen) получают их через пропсы => являются контролируемыми;
+- Состояние разбила на 3 отдельных, чтобы можно было отдельно хранить значения полей (formData), статус отправки (status) и ошибки (errors)
+- Валидацию полей вынесла в отдельный файл utils/validation.ts, везде держала один стиль: функция выведет null, если все ок, и текст ошибки, если есть ошибка.
+- Тк бэкенда нет, отправка инициируется через setTimeout: сразу после нажатия status = 'loading', через 1.5с status = 'success' и показывается ConfirmationScreen. Также не использую хук useEffect, тк нет побочных эффектов, данные некуда посылать.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Что можно улучшить
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Добавить анимацию перехода между формой и экраном подтверждения
+- Написать unit-тесты для остальных функций валидации (сейчас покрыт только телефон)
+- Добавить валидацию на onBlur, а не только при отправке формы
+- Доработать edge-cases в валидации телефона (например, номера с дополнительными кодами, или начинающиеся на +7)
+- Добавить базу данных или хотя бы API и подключить useEffect
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## Демонстрация результата
+<img width="1917" height="957" alt="image" src="https://github.com/user-attachments/assets/417c2039-57c1-4631-927a-fff1859763e9" />
