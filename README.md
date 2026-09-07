@@ -6,19 +6,22 @@
 ## Как запустить локально
 
 1. Клонируй репозиторий:
-\`\`\`bash
-git clone <ссылка-на-твой-репозиторий>
-\`\`\`
+
+```bash
+git clone https://github.com/rina-anise/table_booking/
+```
 
 2. Установи зависимости:
-\`\`\`bash
+   
+```bash
 npm install
-\`\`\`
+```
 
 3. Запусти dev-сервер:
-\`\`\`bash
+   
+```bash
 npm run dev
-\`\`\`
+```
 
 4. Открой [http://localhost:3000](http://localhost:3000)
 
