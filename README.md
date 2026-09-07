@@ -1,6 +1,7 @@
 # Table Booking
 
 Страница бронирования столика онлайн в ресторане на React + TypeScript + Tailwind CSS: форма бронирования с валидацией и экраном подтверждения
+
 Демо: [https://tablebooking-blue.vercel.app/](https://tablebooking-blue.vercel.app/)
 
 ## Как запустить локально
